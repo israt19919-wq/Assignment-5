@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--title and logo-->
+    <title>GitHub Issues Home page</title>
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+
+    <!--font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!--tailwind and daisy-->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!--style.css-->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="px-5 py-5">
+
+    <!--navbar-->
+    <div class="navbar bg-base-100 shadow-sm">
+        <div class="flex-1">
+            <a class="btn btn-ghost text-xl">All Issues</a>
+        </div>
+        <div class="flex gap-2">
+            <input type="text" placeholder="Search" class="input w-24 md:w-auto" />
+            <div class="navbar-end ">
+                <a class="btn bg-primary text-primary-content">Button</a>
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="navbar bg-base-200 shadow-sm ">
+        <div class="dropdown">
+            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+                </svg>
+            </div>
+            <ul tabindex="-1" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                <li><a class="bg-primary text-primary-content px-10">All</a></li>
+                <li><a class="bg-gray-300 px-8">Open</a></li>
+                <li><a class="bg-gray-300 px-7">Closed</a></li>
+            </ul>
+        </div>
+
+        <div class="hidden lg:flex ">
+            <ul class="menu menu-horizontal gap-3">
+                <li><a class="border border-[#64748B] bg-primary text-primary-content px-10">All</a></li>
+                <li><a class="border border-[#64748B] bg-[#e5e6e6] px-8">Open</a></li>
+                <li><a class="border border-[#64748B] bg-[#e5e6e6] px-7">Closed</a></li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <!-- //heading// -->
+    <section class="flex justify-between items-center bg-base-200 shadow-sm px-4 py-4">
+        <div class="flex">
+            <div class="flex justify-center items-center bg-[#ECE4FF] rounded-full w-12 h-12">
+                <img src="assets/Aperture.png" alt="">
+            </div>
+            <div class="px-2">
+                <h2 class="font-bold text-lg">50 Issues</h2>
+                <p class="text-[#64748B]">
+                    Track and manage your project issues
+                </p>
+            </div>
+        </div>
+
+        <div class="flex gap-5">
+            <span class="flex justify-center items-center gap-2">
+                <i class="fa-solid fa-circle" style="color:#00A96E;"></i>
+                <p class="font-semibold ">Open</p>
+            </span>
+            <span class="flex justify-center items-center gap-2">
+                <i class="fa-solid fa-circle" style="color:#A855F7;"></i>
+                <p class="font-semibold">Closed</p>
+            </span>
+        </div>
+    </section>
+
+    
+
+    <!-- //All issues section// -->
+    <section>
+        <div id="all-issues" class="grid grid-cols-1 grid-cols-2 grid-cols-3 gap-8"></div>
+    </section>
+
+
+
+
+    
+    <script src="script.js"></script>
+</body>
+
+</html>
