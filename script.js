@@ -1,86 +1,143 @@
 
+document.getElementById("all-button")
+.addEventListener("click",()=>{
+    loadIssues();
 
-const allIssues = () => {
+})
+
+document.getElementById("open-button")
+.addEventListener("click", ()=>{
+    loadIssues("open");
+
+})
+
+document.getElementById("close-button")
+.addEventListener("click",()=>{
+   loadIssues("closed");
+    
+})
+
+const loadIssues=(anything)=>{
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
-        .then(res => res.json())
-        .then((json) => displayIssues(json.data));
+        .then(res=>res.json())
+        .then((json)=>{
+            if (anything) {
+
+                console.log(json.data.filter((value)=> value.status==anything))
+                displayIssues(json.data.filter((value)=> value.status==anything))
+            
+            } else{
+                displayIssues(json.data)
+            }
+            
+        });
 };
 
-const displayIssues = (issues) => {
+const displayIssues=(issues) => {
+    const allIssues = document.getElementById("all-issues");
+    allIssues.innerHTML = "";
 
-    const issuesContainer = document.getElementById("all-issues");
-    issuesContainer.innerHTML = "";
 
-    for (let issue of issues) {
-        const btnDiv = document.createElement("div");
-        btnDiv.innerHTML =`
+/* "id": 1,
+"title": "Fix navigation menu on mobile devices",
+"description": "The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.",
+"status": "open",
+"labels": [
+"bug",
+"help wanted"
+],
+"priority": "high",
+"author": "john_doe",
+"assignee": "jane_smith",
+"createdAt": "2024-01-15T10:30:00Z",
+"updatedAt": "2024-01-15T10:30:00Z" */
 
-            <div class="card bg-base-100 border-t-4 border-[#00A96E] w-full py-4 px-4 shadow-xl">
+    for (let issue of issues){
+
+        let iconColor ="";
+        if (issue.status === "open"){
+            iconColor ="text-green-600 border-green-600 ";
+        } else{
+            iconColor ="text-purple-600 border-purple-600";
+        }
+
+        let priorityColor ="";
+        if (issue.priority === "high"){
+            priorityColor ="bg-red-100 text-red-500 border-red-600";
+        } else if (issue.priority === "medium"){
+            priorityColor ="bg-yellow-100 text-yellow-500 border-yellow-600";
+        } else {
+            priorityColor ="bg-green-100 text-green-500 border-green-600";
+        }
+        
+        const Div = document.createElement("div");
+        Div.innerHTML =`
+            <div class="border border-t-4 border-gray-200 rounded-xl">
                 <div class="flex justify-between">
-                    <div class="badge rounded-full w-8 h-8 bg-[#CBFADB]">
-                        <span><i class="fa-regular fa-circle" style="color: #00A96E;"></i></span>
+
+                    <div class="${iconColor} pl-2 pt-2">
+                        <span><i class="fa-regular fa-circle";></i></span>
                     </div>
-                    <div class="badge rounded-full text-[#EF4444] bg-[#FEECEC] px-7 py-4">HIGH</div>
+                    <div class=" pr-2 pt-2">
+                        <div class="badge rounded-full px-7 py-4 ${priorityColor}">${issue.priority}</div>
+                    </div>
+                    
                 </div>
 
                 <div class="card-body">
                     <h2 class="card-title font-bold ">
-                        Fix Navigation Menu On Mobile
+                        ${issue.title}
                     </h2>
-                    <p class="pb-2">The navigation menu doesn't colapse <br> properly on mobile devices...</p>
+                    <p class="pb-2">${issue.description}</p>
+
                     <div class="card-actions justify-end">
-                        <div class="badge badge-outline rounded-full border-[#FECACA] bg-[#FEECEC] text-[#EF4444]">
+                       
+                            ${issue.labels.map((value)=>{
+
+                                if (value=="bug") {
+
+                                    return  ` <div class="badge badge-outline rounded-full border border-red-200 bg-red-200  ">
                             <span><i class="fa-solid fa-spider"></i></span>
-                            BUG</div>
-                        <div class="badge badge-outline rounded-full border-[#FDE68A] bg-[#FFF8DB] text-[#D97706]">
+                            ${value}</div>`;
+
+                                } else {
+
+                                    return ` <div class="badge badge-outline rounded-full border border-red-200 bg-red-200">
                             <span><i class="fa-solid fa-life-ring"></i></span>
-                            HELP WANTED</div>
+                            ${value}</div>`;
+
+                                }
+                                
+
+                                
+                            }).join("")}
+                        
                     </div>
+
                 </div>
+
                 <div class="border-t-2 border-gray-300" style="color: gray;">
-                    <p>#1 by john_doe</p> <br>
-                        <p>1/15/2024</p>
+                    <div class="flex justify-between">
+                        <p> ${issue.author}</p>
+                        <p> ${issue.createdAt}</p>
+                    </div>
+                    <div class="flex justify-between">
+                        <p> ${issue.assignee}</p>
+                        <p> ${issue.updatedAt}</p>
+                    </div>
+        
                 </div>
 
             </div>
-            `
-        issuesContainer.append(btnDiv);
+
+        `
+        allIssues.append(Div);
+
     }
+        
+
+}
 
 
 
 
-};
-allIssues();
-
-
-
-
-//signUp part
-document.getElementById("sign-btn").addEventListener("click", function () {
-    //1.get the user name
-    const nameInput = document.getElementById("user-name");
-    const userName = nameInput.value;
-    console.log(userName);
-
-    //2.get the password
-    const passInput = document.getElementById("user-pass");
-    const userPass = passInput.value;
-    console.log(userPass);
-
-    //3.match name & pass
-    if (userName == "admin" && userPass == "admin123") {
-        //3-1.if it's true alert homepage
-        alert("login successful");
-
-        //window.location.replace("/home.html");
-        window.location.assign("/home.html");
-
-    } else {
-        //3-2.if it's false alert return 
-        alert("login failed");
-        return;
-    }
-
-
-});
