@@ -29,10 +29,8 @@
             <a class="btn btn-ghost text-xl">All Issues</a>
         </div>
         <div class="flex gap-2">
-            <input type="text" placeholder="Search" class="input w-24 md:w-auto" />
-            <div class="navbar-end ">
-                <a class="btn bg-primary text-primary-content">Button</a>
-            </div>
+            <input id="search-input" type="text" placeholder="Search" class="input w-24 md:w-auto" />
+            <button id="search-button" type="button" class="btn bg-primary text-primary-content">Button</button>
         </div>
     </div>
 
@@ -59,13 +57,14 @@
                 <img src="assets/Aperture.png" alt="">
             </div>
             <div class="px-2">
-                <h2 class="font-bold text-lg">50 Issues</h2>
+                <h2 id="issue-count" class="font-bold text-lg">0 Issues</h2>
+                <div id="issue-cntainer"></div>
                 <p class="text-[#64748B]">
                     Track and manage your project issues
                 </p>
             </div>
         </div>
-
+    
         <div class="flex gap-5">
             <span class="flex justify-center items-center gap-2">
                 <i class="fa-solid fa-circle" style="color:#00A96E;"></i>
@@ -81,17 +80,21 @@
     
 
     <!-- //All issues section//-->
-    <section id="all-issues" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-5">
-        <div >
+    <section id="all-issues" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-5">
+        <div>
 
         </div>
     </section> 
 
-
+    <dialog id="issues-modal" class="modal"></dialog>
+       
+    
 
 
     <script src="login.js"></script>
     <script src="script.js"></script>
+
+
 </body>
 
 </html>
